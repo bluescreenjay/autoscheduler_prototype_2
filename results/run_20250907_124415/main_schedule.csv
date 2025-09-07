@@ -1,0 +1,175 @@
+Type,Start Time,End Time,Room,Applicants,Recruiters
+individual,09/11/2025 05:40 PM,09/11/2025 06:00 PM,G101,Yen Le,Alice
+individual,09/11/2025 05:40 PM,09/11/2025 06:00 PM,G102,Julia Fliegelman,Bob
+individual,09/11/2025 05:40 PM,09/11/2025 06:00 PM,S201,Dora Akouete,Carol
+individual,09/11/2025 05:40 PM,09/11/2025 06:00 PM,S202,Roan Varghese,David
+individual,09/11/2025 05:40 PM,09/11/2025 06:00 PM,S203,Aarav Ravikanti,Eve
+group,09/11/2025 06:00 PM,09/11/2025 06:40 PM,G101,Yen Le; Julia Fliegelman; Man Patel; Anya Kanodia; Aarav Ravikanti; Dev Patel,Alice; Bob; Carol; David
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,G101,Shruthika Saravanakumar,Alice
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,G102,Riley O’Connor,Bob
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,S201,Anya Kanodia,Carol
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,S202,Dev Patel,David
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,S203,Britny Jiang,Eve
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,S204,Parth Bharadwaj,Frank
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,R301,Mi So Brownbridge,Grace
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,R302,Man Patel,Heidi
+individual,09/11/2025 06:40 PM,09/11/2025 07:00 PM,R303,Adam Miladi,Ivan
+group,09/11/2025 07:00 PM,09/11/2025 07:40 PM,G101,Faith Pursley; Phillip Bagan; Louis Harris; Elisabeth Tershak; Parth Bharadwaj; Arya Patel; Joaquin Tuckett; Riley O’Connor,Alice; Carol; David; Eve
+group,09/11/2025 07:00 PM,09/11/2025 07:40 PM,G102,Krish Sharma; Camden Bade; Roan Varghese; Liam Albert; Gideon Lovern; Liam Bantasan; Kailyn Carmichael; Mi So Brownbridge,Frank; Grace; Ivan; Julia
+group,09/11/2025 07:00 PM,09/11/2025 07:40 PM,S201,Shruthika Saravanakumar; Rhea Rajmanna; Tanner Bayly; Kyle Bluhm; Britny Jiang; Dora Akouete; Dianne Barahona Bonilla; Adam Miladi,Kevin; Linda; Mike; Nancy
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,G101,Faith Pursley,Alice
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,G102,Krish Sharma,Carol
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,S201,Kailyn Carmichael,David
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,S202,Gideon Lovern,Eve
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,S203,Rhea Rajmanna,Frank
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,S204,Ashley Marken,Grace
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R301,Kenneth Salmeron,Ivan
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R302,Phillip Bagan,Julia
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R303,Louis Harris,Kevin
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R304,Elisabeth Tershak,Linda
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R305,Matthew Palmer,Mike
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R306,Dianne Barahona Bonilla,Nancy
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R307,Joaquin Tuckett,Penny
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R308,Liam Albert,Sam
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R309,Liam Bantasan,Vic
+individual,09/11/2025 07:40 PM,09/11/2025 08:00 PM,R310,Tanner Bayly,Yara
+group,09/11/2025 08:00 PM,09/11/2025 08:40 PM,G101,Tanush Mukherjee; Matthew Palmer; Tu Linh Nguyen; Ashley Marken; Shiva Pochampally; Molly Smallwood; Connor Kim; Kenneth Salmeron,Alice; Carol; David; Eve
+individual,09/11/2025 08:00 PM,09/11/2025 08:20 PM,G102,Camden Bade,Frank
+individual,09/11/2025 08:00 PM,09/11/2025 08:20 PM,S201,Arya Patel,Grace
+individual,09/11/2025 08:00 PM,09/11/2025 08:20 PM,S202,Kyle Bluhm,Ivan
+individual,09/11/2025 08:40 PM,09/11/2025 09:00 PM,G101,Tanush Mukherjee,Alice
+individual,09/11/2025 08:40 PM,09/11/2025 09:00 PM,G102,Connor Kim,Carol
+individual,09/11/2025 08:40 PM,09/11/2025 09:00 PM,S201,Molly Smallwood,David
+individual,09/11/2025 08:40 PM,09/11/2025 09:00 PM,S202,Tu Linh Nguyen,Eve
+individual,09/11/2025 08:40 PM,09/11/2025 09:00 PM,S203,Shiva Pochampally,Frank
+group,09/12/2025 05:00 PM,09/12/2025 05:40 PM,G101,Ben schassler; Ryan Alberti; Delara Bahrambeigui; Luke D’Entremont; Aaron Rein; Alexis Hamilton; Arsheya Prasad; Matthew Scala,Alice; Bob; Carol; David
+group,09/12/2025 05:00 PM,09/12/2025 05:40 PM,G102,Esteban Yanez; Micah Wissman; Aditeya Banerjee; Raghav Bhati; Javier Smith; Tyler Campbell; Dhruba Bhattacharjee; Benjamin Smith,Eve; Frank; Grace; Heidi
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,G101,Ben schassler,Alice
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,G102,Delara Bahrambeigui,Bob
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,S201,Carlos de la Fuente Gonzalez,Carol
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,S202,Esteban Yanez,David
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,S203,Guinevere Vu,Eve
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,S204,Ryan Alberti,Frank
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R301,Micah Wissman,Grace
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R302,Laksh Bharani,Heidi
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R303,Arsheya Prasad,Ivan
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R304,Matthew Scala,Julia
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R305,Javier Smith,Kevin
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R306,Logan Sharp,Linda
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R307,Luke D’Entremont,Mike
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R308,Aaron Rein,Nancy
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R309,Ricardo Pastor,Oscar
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R310,Alexis Hamilton,Penny
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R311,Dhruba Bhattacharjee,Sam
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R312,Aditeya Banerjee,Uma
+individual,09/12/2025 05:40 PM,09/12/2025 06:00 PM,R313,Benjamin Smith,Wendy
+group,09/12/2025 06:00 PM,09/12/2025 06:40 PM,G101,Leon Chen; Logan Sharp; Sebastian Pacheco; Roy Chen; Laksh Bharani; Guinevere Vu; Ricardo Pastor; Carlos de la Fuente Gonzalez,Alice; Bob; Carol; David
+individual,09/12/2025 06:00 PM,09/12/2025 06:20 PM,G102,Tyler Campbell,Eve
+individual,09/12/2025 06:00 PM,09/12/2025 06:20 PM,S201,Raghav Bhati,Frank
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,G101,Leon Chen,Alice
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,G102,Lakshya Agarwal,Bob
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,S201,Sebastian Pacheco,Carol
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,S202,Roy Chen,David
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,S203,Evan Thompson,Eve
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,S204,Borui Zhu,Frank
+individual,09/12/2025 06:40 PM,09/12/2025 07:00 PM,R301,Navdeep Sangwan,Grace
+group,09/12/2025 07:00 PM,09/12/2025 07:40 PM,G101,Arushi Chintakayala; Braxton McDaniel; Ryan Hornstein; Borui Zhu; Navdeep Sangwan; Evan Thompson; Lakshya Agarwal; Julia Burant,Alice; Bob; David; Eve
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,G101,Arushi Chintakayala,Alice
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,G102,Braxton McDaniel,Bob
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,S201,Ameen Harandi,David
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,S202,Victoria Barbera,Eve
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,S203,Ryan Hornstein,Grace
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,S204,Julia Burant,Heidi
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,R301,Rafiel Cherenet,Ivan
+individual,09/12/2025 07:40 PM,09/12/2025 08:00 PM,R302,Jia Xi Lin,Julia
+group,09/12/2025 08:00 PM,09/12/2025 08:40 PM,G101,Ameen Harandi; Robert Peacher; Victoria Barbera; Ebadullah Hakim; Aadil Singh; Lambert Edigin; Jia Xi Lin; Rafiel Cherenet,Alice; Bob; David; Eve
+individual,09/12/2025 08:40 PM,09/12/2025 09:00 PM,G101,Robert Peacher,Alice
+individual,09/12/2025 08:40 PM,09/12/2025 09:00 PM,G102,Aadil Singh,Bob
+individual,09/12/2025 08:40 PM,09/12/2025 09:00 PM,S201,Ebadullah Hakim,David
+individual,09/12/2025 08:40 PM,09/12/2025 09:00 PM,S202,Lambert Edigin,Eve
+individual,09/13/2025 09:40 AM,09/13/2025 10:00 AM,G101,Ian Low,Alice
+individual,09/13/2025 09:40 AM,09/13/2025 10:00 AM,G102,Alexander Ibacache,Bob
+individual,09/13/2025 09:40 AM,09/13/2025 10:00 AM,S201,William Collins,Carol
+group,09/13/2025 10:00 AM,09/13/2025 10:40 AM,G101,Tyler Burbano; Keya Sikotra; Caleb Winnings; Samhita Gupta; Akanksha Potluri; Ian Low; Alexander Ibacache; William Collins,Alice; Bob; Carol; David
+individual,09/13/2025 10:40 AM,09/13/2025 11:00 AM,G101,Tyler Burbano,Alice
+individual,09/13/2025 10:40 AM,09/13/2025 11:00 AM,G102,Caleb Winnings,Bob
+individual,09/13/2025 10:40 AM,09/13/2025 11:00 AM,S201,Keya Sikotra,Carol
+individual,09/13/2025 10:40 AM,09/13/2025 11:00 AM,S202,Samhita Gupta,David
+individual,09/13/2025 10:40 AM,09/13/2025 11:00 AM,S203,Akanksha Potluri,Eve
+group,09/13/2025 01:00 PM,09/13/2025 01:40 PM,G101,Ahmad Kutkut; Alex Clabault; Vicky Ji; Lily Quach; Byron Millet; Christian Thompson; Achya Zobayer; Kevin Tieu,Alice; Bob; Carol; Eve
+group,09/13/2025 01:00 PM,09/13/2025 01:40 PM,G102,Carter Hawkins; Michael Karam; Destiny Xia; Divyasimha Talreja; Corey Ahl; Ryan Bentley; Amelie Cohrssen; Caleb Boyer,Frank; Grace; Heidi; Ivan
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,G101,Ahmad Kutkut,Alice
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,G102,Achya Zobayer,Bob
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,S201,Carter Hawkins,Carol
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,S202,Michael Karam,Eve
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,S203,Christian Thompson,Frank
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,S204,Destiny Xia,Grace
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R301,Corey Ahl,Heidi
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R302,Caleb Boyer,Ivan
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R303,Divyasimha Talreja,Julia
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R304,Alex Clabault,Kevin
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R305,Vicky Ji,Linda
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R306,Kevin Tieu,Mike
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R307,Byron Millet,Nancy
+individual,09/13/2025 01:40 PM,09/13/2025 02:00 PM,R308,Ryan Bentley,Oscar
+individual,09/13/2025 02:00 PM,09/13/2025 02:20 PM,G101,Lily Quach,Alice
+individual,09/13/2025 02:00 PM,09/13/2025 02:20 PM,G102,Amelie Cohrssen,Bob
+individual,09/13/2025 06:40 PM,09/13/2025 07:00 PM,G101,Alex Morris,Bob
+individual,09/13/2025 06:40 PM,09/13/2025 07:00 PM,G102,Rayan Charah,Carol
+individual,09/13/2025 06:40 PM,09/13/2025 07:00 PM,S201,Alex Foster,Eve
+group,09/13/2025 07:00 PM,09/13/2025 07:40 PM,G101,Zara Syeda; Alex Morris; Joel Layman-Wenger; Sofyan Elshaer; Alex Foster; Rayan Charah; Rohan Bhadange; Anisha Pulla,Bob; Carol; Eve; Frank
+individual,09/13/2025 07:40 PM,09/13/2025 08:00 PM,G101,Zara Syeda,Bob
+individual,09/13/2025 07:40 PM,09/13/2025 08:00 PM,G102,Joel Layman-Wenger,Carol
+individual,09/13/2025 07:40 PM,09/13/2025 08:00 PM,S201,Sofyan Elshaer,Eve
+individual,09/13/2025 07:40 PM,09/13/2025 08:00 PM,S202,Anisha Pulla,Frank
+individual,09/13/2025 07:40 PM,09/13/2025 08:00 PM,S203,Rohan Bhadange,Heidi
+individual,09/14/2025 03:40 PM,09/14/2025 04:00 PM,G101,Dylan Macey,Alice
+individual,09/14/2025 03:40 PM,09/14/2025 04:00 PM,G102,Norbert Asiedu,Bob
+group,09/14/2025 04:00 PM,09/14/2025 04:40 PM,G101,Tyler Cambridge; Destiny Cartagena; Norbert Asiedu; Dylan Macey,Alice; Bob; Carol; David
+individual,09/14/2025 04:40 PM,09/14/2025 05:00 PM,G101,Tyler Cambridge,Alice
+individual,09/14/2025 04:40 PM,09/14/2025 05:00 PM,G102,Destiny Cartagena,Bob
+individual,09/14/2025 07:40 PM,09/14/2025 08:00 PM,G101,Devon Haapakoski,Alice
+individual,09/14/2025 07:40 PM,09/14/2025 08:00 PM,G102,Raven Huerte,Bob
+individual,09/14/2025 07:40 PM,09/14/2025 08:00 PM,S201,Mira Yeoh,David
+individual,09/14/2025 07:40 PM,09/14/2025 08:00 PM,S202,Gregory Vine,Frank
+individual,09/14/2025 07:40 PM,09/14/2025 08:00 PM,S203,Mostafa Elsanousi,Grace
+individual,09/14/2025 07:40 PM,09/14/2025 08:00 PM,S204,Kyle Keppler,Heidi
+group,09/14/2025 08:00 PM,09/14/2025 08:40 PM,G101,Hannah Longfellow; Mira Yeoh; Gregory Vine; Mostafa Elsanousi; Kyle Keppler; Devon Haapakoski; Raven Huerte; Chris Lin,Alice; Bob; David; Frank
+individual,09/14/2025 08:40 PM,09/14/2025 09:00 PM,G101,Hannah Longfellow,Alice
+individual,09/14/2025 08:40 PM,09/14/2025 09:00 PM,G102,Chris Lin,Bob
+group,09/15/2025 05:00 PM,09/15/2025 05:40 PM,G101,Shuborno Zaman; Abhishek Hari; Sunjeet Nakkala; Jackson Carey; Malaysia Schaffer; Leigh Dubois; Allie Cook; Christine Robinson,Alice; Bob; Carol; David
+group,09/15/2025 05:00 PM,09/15/2025 05:40 PM,G102,Michiel De Jong; Ishita Punna; Riva Jain; Alejandro Rios; Komal Tummala; Gabriel Chesney; Sanjana Anem; Ryan Williams,Eve; Frank; Grace; Heidi
+individual,09/15/2025 05:20 PM,09/15/2025 05:40 PM,S201,Arnav Gupta,Ivan
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,G101,Shuborno Zaman,Alice
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,G102,Rahul Jadhav,Bob
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,S201,Haaris Mallick,Carol
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,S202,Chunyang Song,David
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,S203,Abhishek Hari,Eve
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,S204,Michiel De Jong,Frank
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R301,Jackson Carey,Grace
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R302,Christine Robinson,Heidi
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R303,Evan Miller,Ivan
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R304,Ishita Punna,Julia
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R305,Riva Jain,Kevin
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R306,Gabriel Chesney,Linda
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R307,Alejandro Rios,Mike
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R308,Shelby Owed,Nancy
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R309,Sunjeet Nakkala,Oscar
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R310,Leigh Dubois,Penny
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R311,Malaysia Schaffer,Sam
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R312,Salma Amrani Joutei,Tina
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R313,Sanjana Anem,Vic
+individual,09/15/2025 05:40 PM,09/15/2025 06:00 PM,R314,Allie Cook,Yara
+group,09/15/2025 06:00 PM,09/15/2025 06:40 PM,G101,Britt McCall; Rahul Jadhav; Owen Stuckman; Timothy James Nickerson; Haaris Mallick; Mason Smith; Shelby Owed; Chunyang Song,Alice; Bob; Carol; David
+group,09/15/2025 06:00 PM,09/15/2025 06:40 PM,G102,Alexander Richards; Ibrahim Seshan; Phoebe Budd; Evan Miller; Arnav Gupta; Alexander Nassif; Salma Amrani Joutei; Hyunwoo Jeong,Eve; Frank; Grace; Heidi
+individual,09/15/2025 06:00 PM,09/15/2025 06:20 PM,S201,Komal Tummala,Ivan
+individual,09/15/2025 06:00 PM,09/15/2025 06:20 PM,S202,Ryan Williams,Julia
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,G101,Britt McCall,Alice
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,G102,Alexander Richards,Bob
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,S201,Phoebe Budd,Carol
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,S202,Owen Stuckman,David
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,S203,Ibrahim Seshan,Eve
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,S204,Timothy James Nickerson,Frank
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,R301,Mason Smith,Grace
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,R302,Hyunwoo Jeong,Heidi
+individual,09/15/2025 06:40 PM,09/15/2025 07:00 PM,R303,Alexander Nassif,Ivan

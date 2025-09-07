@@ -12,13 +12,6 @@ from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Tuple
 import random
 
-try:
-    from ortools.linear_solver import pywraplp
-    ORTOOLS_AVAILABLE = True
-except ImportError:
-    ORTOOLS_AVAILABLE = False
-    print("OR-Tools not available, using greedy algorithm only")
-
 @dataclass
 class TimeSlot:
     start: datetime
@@ -378,17 +371,55 @@ class ImprovedScheduler:
     def _get_available_recruiters(self, start_time: datetime, duration: int) -> List[str]:
         """Get list of recruiters available for the given time slot."""
         available = []
+        end_time = start_time + timedelta(minutes=duration)
+        
         for recruiter_id in self.recruiters:
-            if self._is_recruiter_available(recruiter_id, start_time, duration):
+            # First check original availability from input data
+            if not self._is_recruiter_available(recruiter_id, start_time, duration):
+                continue
+                
+            # Then check against already scheduled interviews
+            is_free = True
+            for interview in self.scheduled_interviews:
+                if recruiter_id in interview.recruiters:
+                    interview_start = interview.time_slot.start
+                    interview_end = interview.time_slot.end
+                    
+                    # Check for ANY overlap - fixed logic
+                    if start_time < interview_end and end_time > interview_start:
+                        is_free = False
+                        break
+            
+            if is_free:
                 available.append(recruiter_id)
+                
         return available
 
     def _get_available_rooms(self, start_time: datetime, duration: int) -> List[str]:
         """Get list of rooms available for the given time slot."""
         available = []
+        end_time = start_time + timedelta(minutes=duration)
+        
         for room_id in self.rooms:
-            if self._is_room_available(room_id, start_time, duration):
+            # First check original availability from input data
+            if not self._is_room_available(room_id, start_time, duration):
+                continue
+                
+            # Then check against already scheduled interviews
+            is_free = True
+            for interview in self.scheduled_interviews:
+                if interview.room == room_id:
+                    interview_start = interview.time_slot.start
+                    interview_end = interview.time_slot.end
+                    
+                    # Check for ANY overlap - fixed logic
+                    if start_time < interview_end and end_time > interview_start:
+                        is_free = False
+                        break
+            
+            if is_free:
                 available.append(room_id)
+                
         return available
 
     def _has_scheduling_conflict(self, applicant_id: str, start_time: datetime, duration_minutes: int) -> bool:
