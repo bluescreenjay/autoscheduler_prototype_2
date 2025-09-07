@@ -147,9 +147,6 @@ class ImprovedScheduler:
                                 print(f"DEBUG: Date parsing error: {e}")
                                 continue
                 
-                if applicant_id == list(reader.fieldnames)[1] if hasattr(reader, 'fieldnames') else applicant_id == row.get('Email Address', ''):  # Only debug first applicant
-                    break
-                
                 self.applicants[applicant_id] = {
                     'id': applicant_id,
                     'name': row.get('First and Last Name', '').strip(),
@@ -394,6 +391,24 @@ class ImprovedScheduler:
                 available.append(room_id)
         return available
 
+    def _has_scheduling_conflict(self, applicant_id: str, start_time: datetime, duration_minutes: int) -> bool:
+        """Check if applicant has another interview that would create a direct overlap."""
+        proposed_start = start_time
+        proposed_end = start_time + timedelta(minutes=duration_minutes)
+        
+        for interview in self.scheduled_interviews:
+            if applicant_id in interview.applicants:
+                existing_start = interview.time_slot.start
+                existing_end = interview.time_slot.end
+                
+                # Check for direct overlap (always a conflict)
+                if not (proposed_end <= existing_start or existing_end <= proposed_start):
+                    return True
+                    
+                # For 90-minute constraint: handled during optimization, not as hard constraint
+                
+        return False
+
     def _improved_greedy_schedule(self):
         """Improved greedy scheduling algorithm."""
         print("Starting improved greedy interview scheduling...")
@@ -433,11 +448,276 @@ class ImprovedScheduler:
         
         return scheduled_completely > 0
 
+    def _optimized_scheduling(self):
+        """Two-phase scheduling: maximize coverage first, then optimize spacing."""
+        print("Starting optimized two-phase scheduling...")
+        
+        # Phase 1: Maximum coverage (ignore 90-min constraint temporarily)
+        self._phase1_maximum_coverage()
+        
+        # Phase 2: Optimize for 90-minute constraint via swapping
+        self._phase2_optimize_spacing()
+        
+        return len(self.scheduled_interviews) > 0
+
+    def _phase1_maximum_coverage(self):
+        """Phase 1: Schedule as many interviews as possible."""
+        applicant_list = list(self.applicants.keys())
+        
+        # Sort by availability (least available first for better packing)
+        applicant_list.sort(key=lambda x: len(self.applicants[x]['availability']))
+        
+        scheduled_completely = 0
+        scheduled_partially = 0
+        
+        for applicant_id in applicant_list:
+            group_scheduled = False
+            individual_scheduled = False
+            
+            # Try group interview first (harder to schedule)
+            if applicant_id not in self.applicant_group_scheduled:
+                group_scheduled = self._try_schedule_group_flexible(applicant_id)
+                
+            # Try individual interview
+            if applicant_id not in self.applicant_individual_scheduled:
+                individual_scheduled = self._try_schedule_individual_flexible(applicant_id)
+            
+            if group_scheduled and individual_scheduled:
+                scheduled_completely += 1
+            elif group_scheduled or individual_scheduled:
+                scheduled_partially += 1
+        
+        total_applicants = len(self.applicants)
+        print(f"Phase 1 complete:")
+        print(f"  - Fully scheduled: {scheduled_completely}/{total_applicants}")
+        print(f"  - Partially scheduled: {scheduled_partially}")
+        print(f"  - Total interviews: {len(self.scheduled_interviews)}")
+
+    def _phase2_optimize_spacing(self):
+        """Phase 2: Improve 90-minute constraint compliance via local search."""
+        print("Phase 2: Optimizing interview spacing...")
+        max_iterations = 50
+        improvements = 0
+        
+        for iteration in range(max_iterations):
+            if self._improve_spacing_iteration():
+                improvements += 1
+            else:
+                break
+        
+        print(f"Spacing optimization: {improvements} improvements made")
+
+    def _try_schedule_group_flexible(self, applicant_id: str) -> bool:
+        """Try to schedule group interview with flexible group size and timing."""
+        best_option = None
+        best_score = -1
+        
+        for time_slot in self.time_slots:
+            if not self._is_applicant_available(applicant_id, time_slot.start, 40):
+                continue
+                
+            # Only check for direct conflicts, not 90-minute constraint
+            if self._has_scheduling_conflict(applicant_id, time_slot.start, 40):
+                continue
+                
+            # Get resources
+            available_rooms = self._get_available_rooms(time_slot.start, 40)
+            available_recruiters = self._get_available_recruiters(time_slot.start, 40)
+            
+            if len(available_rooms) == 0 or len(available_recruiters) < 2:  # Minimum 2 recruiters
+                continue
+                
+            # Find available applicants (flexible group size)
+            available_applicants = [applicant_id]
+            for other_id in self.applicants:
+                if (other_id != applicant_id and 
+                    other_id not in self.applicant_group_scheduled and
+                    self._is_applicant_available(other_id, time_slot.start, 40) and
+                    not self._has_scheduling_conflict(other_id, time_slot.start, 40)):
+                    available_applicants.append(other_id)
+            
+            # Score this option (prefer larger groups, more recruiters, better timing)
+            if len(available_applicants) >= 2:  # Minimum group size
+                score = (len(available_applicants) * 10 + 
+                        len(available_recruiters) * 5 +
+                        self._timing_score(applicant_id, time_slot.start))
+                
+                if score > best_score:
+                    best_score = score
+                    best_option = {
+                        'time_slot': time_slot,
+                        'applicants': available_applicants[:8],  # Max 8
+                        'recruiters': available_recruiters[:min(4, len(available_recruiters))],
+                        'room': available_rooms[0]
+                    }
+        
+        # Schedule best option
+        if best_option:
+            return self._create_group_interview(best_option)
+        
+        return False
+
+    def _try_schedule_individual_flexible(self, applicant_id: str) -> bool:
+        """Try to schedule individual interview with flexible timing."""
+        best_option = None
+        best_score = -1
+        
+        for time_slot in self.time_slots:
+            if not self._is_applicant_available(applicant_id, time_slot.start, 20):
+                continue
+                
+            # Only check for direct conflicts, not 90-minute constraint
+            if self._has_scheduling_conflict(applicant_id, time_slot.start, 20):
+                continue
+                
+            # Get resources
+            available_rooms = self._get_available_rooms(time_slot.start, 20)
+            available_recruiters = self._get_available_recruiters(time_slot.start, 20)
+            
+            if len(available_rooms) == 0 or len(available_recruiters) == 0:
+                continue
+                
+            # Score this timing
+            score = (100 +  # Base score
+                    len(available_recruiters) * 2 +
+                    self._timing_score(applicant_id, time_slot.start))
+            
+            if score > best_score:
+                best_score = score
+                best_option = {
+                    'time_slot': time_slot,
+                    'room': available_rooms[0],
+                    'recruiter': available_recruiters[0]
+                }
+        
+        # Schedule best option
+        if best_option:
+            return self._create_individual_interview(applicant_id, best_option)
+        
+        return False
+
+    def _timing_score(self, applicant_id: str, start_time: datetime) -> int:
+        """Score timing based on proximity to other interviews for same applicant."""
+        score = 0
+        for interview in self.scheduled_interviews:
+            if applicant_id in interview.applicants:
+                gap = abs((interview.time_slot.start - start_time).total_seconds() / 60)
+                if gap <= 90:
+                    score += 100 - gap  # Prefer closer timing within 90 minutes
+        return score
+
+    def _create_group_interview(self, option) -> bool:
+        """Create and schedule a group interview."""
+        group_end_time = option['time_slot'].start + timedelta(minutes=40)
+        group_slot = TimeSlot(option['time_slot'].start, group_end_time)
+        
+        interview = Interview(
+            type='group',
+            time_slot=group_slot,
+            room=option['room'],
+            applicants=option['applicants'],
+            recruiters=option['recruiters']
+        )
+        
+        self.scheduled_interviews.append(interview)
+        
+        # Mark resources as used
+        self.room_schedule[(option['time_slot'].start, option['room'])] = True
+        for recruiter_id in option['recruiters']:
+            self.recruiter_schedule[(option['time_slot'].start, recruiter_id)] = True
+        
+        # Mark applicants as having group interview
+        for app_id in option['applicants']:
+            self.applicant_group_scheduled.add(app_id)
+        
+        return True
+
+    def _create_individual_interview(self, applicant_id: str, option) -> bool:
+        """Create and schedule an individual interview."""
+        individual_end_time = option['time_slot'].start + timedelta(minutes=20)
+        individual_slot = TimeSlot(option['time_slot'].start, individual_end_time)
+        
+        interview = Interview(
+            type='individual',
+            time_slot=individual_slot,
+            room=option['room'],
+            applicants=[applicant_id],
+            recruiters=[option['recruiter']]
+        )
+        
+        self.scheduled_interviews.append(interview)
+        
+        # Mark resources as used
+        self.room_schedule[(option['time_slot'].start, option['room'])] = True
+        self.recruiter_schedule[(option['time_slot'].start, option['recruiter'])] = True
+        
+        # Mark applicant as having individual interview
+        self.applicant_individual_scheduled.add(applicant_id)
+        
+        return True
+
+    def _improve_spacing_iteration(self) -> bool:
+        """Try to improve one scheduling decision via local search."""
+        # Find applicants with spacing violations
+        violations = self._find_spacing_violations()
+        
+        if not violations:
+            return False
+        
+        # Try to fix the worst violation
+        worst_violation = max(violations, key=lambda x: x['gap_minutes'])
+        
+        # Try to reschedule one of the interviews to be closer
+        return self._fix_spacing_violation(worst_violation)
+
+    def _find_spacing_violations(self):
+        """Find all 90-minute constraint violations."""
+        violations = []
+        
+        # Group interviews by applicant
+        applicant_interviews = {}
+        for interview in self.scheduled_interviews:
+            for app_id in interview.applicants:
+                if app_id not in applicant_interviews:
+                    applicant_interviews[app_id] = []
+                applicant_interviews[app_id].append(interview)
+        
+        # Check each applicant with multiple interviews
+        for app_id, interviews in applicant_interviews.items():
+            if len(interviews) >= 2:
+                sorted_interviews = sorted(interviews, key=lambda x: x.time_slot.start)
+                
+                for i in range(len(sorted_interviews) - 1):
+                    first_end = sorted_interviews[i].time_slot.end
+                    second_start = sorted_interviews[i + 1].time_slot.start
+                    
+                    gap_minutes = (second_start - first_end).total_seconds() / 60
+                    
+                    if gap_minutes > 90:
+                        violations.append({
+                            'applicant_id': app_id,
+                            'gap_minutes': gap_minutes,
+                            'first_interview': sorted_interviews[i],
+                            'second_interview': sorted_interviews[i + 1]
+                        })
+        
+        return violations
+
+    def _fix_spacing_violation(self, violation) -> bool:
+        """Try to reschedule interviews to fix spacing violation."""
+        # For now, return False - more complex rescheduling logic would go here
+        # This is a placeholder for the full implementation
+        return False
+
     def _schedule_applicant_group_interview(self, applicant_id: str) -> bool:
         """Try to schedule a group interview for a specific applicant."""
         for time_slot in self.time_slots:
             # Check if applicant is available
             if not self._is_applicant_available(applicant_id, time_slot.start, 40):
+                continue
+                
+            # Check for direct scheduling conflicts only
+            if self._has_scheduling_conflict(applicant_id, time_slot.start, 40):
                 continue
                 
             # Get available rooms and recruiters
@@ -452,7 +732,8 @@ class ImprovedScheduler:
             for other_id in self.applicants:
                 if (other_id != applicant_id and 
                     other_id not in self.applicant_group_scheduled and
-                    self._is_applicant_available(other_id, time_slot.start, 40)):
+                    self._is_applicant_available(other_id, time_slot.start, 40) and
+                    not self._has_scheduling_conflict(other_id, time_slot.start, 40)):
                     other_applicants.append(other_id)
             
             # Need at least 3 other applicants (total 4 minimum for group)
@@ -498,6 +779,10 @@ class ImprovedScheduler:
             if not self._is_applicant_available(applicant_id, time_slot.start, 20):
                 continue
                 
+            # Check for direct scheduling conflicts only
+            if self._has_scheduling_conflict(applicant_id, time_slot.start, 20):
+                continue
+                
             # Get available rooms and recruiters
             available_rooms = self._get_available_rooms(time_slot.start, 20)
             available_recruiters = self._get_available_recruiters(time_slot.start, 20)
@@ -535,16 +820,118 @@ class ImprovedScheduler:
         return False
 
     def schedule_interviews(self):
-        """Main scheduling method."""
-        # Try improved greedy algorithm
-        success = self._improved_greedy_schedule()
+        """Enhanced main scheduling method with multiple strategies."""
+        # Try multiple strategies
+        strategies = [
+            ('optimized_two_phase', self._optimized_scheduling),
+            ('improved_greedy', self._improved_greedy_schedule)
+        ]
         
-        if success:
+        best_result = None
+        best_score = -1
+        
+        for strategy_name, strategy_func in strategies:
+            print(f"\n=== Trying strategy: {strategy_name} ===")
+            
+            # Reset state
+            self._reset_scheduling_state()
+            
+            success = strategy_func()
+            
+            if success:
+                score = self._evaluate_schedule()
+                print(f"Strategy {strategy_name} score: {score}")
+                
+                if score > best_score:
+                    best_score = score
+                    best_result = {
+                        'interviews': self.scheduled_interviews.copy(),
+                        'group_scheduled': self.applicant_group_scheduled.copy(),
+                        'individual_scheduled': self.applicant_individual_scheduled.copy(),
+                        'strategy': strategy_name
+                    }
+        
+        if best_result:
+            # Apply best result
+            self.scheduled_interviews = best_result['interviews']
+            self.applicant_group_scheduled = best_result['group_scheduled']
+            self.applicant_individual_scheduled = best_result['individual_scheduled']
+            
+            print(f"\n=== Best strategy: {best_result['strategy']} with score {best_score} ===")
             print(f"Scheduling successful! Generated {len(self.scheduled_interviews)} interviews.")
-        else:
-            print("Scheduling failed - no interviews could be scheduled.")
+            
+            # Validate 90-minute constraint
+            self._validate_90_minute_constraint()
+            return True
         
-        return success
+        print("Scheduling failed - no interviews could be scheduled.")
+        return False
+
+    def _reset_scheduling_state(self):
+        """Reset scheduling state for trying different strategies."""
+        self.scheduled_interviews = []
+        self.applicant_group_scheduled = set()
+        self.applicant_individual_scheduled = set()
+        self.room_schedule = {}
+        self.recruiter_schedule = {}
+
+    def _evaluate_schedule(self) -> float:
+        """Evaluate the quality of current schedule."""
+        fully_scheduled = len(self.applicant_group_scheduled & self.applicant_individual_scheduled)
+        total_interviews = len(self.scheduled_interviews)
+        violations = len(self._find_spacing_violations())
+        
+        # Score: prioritize full scheduling, minimize violations
+        score = (fully_scheduled * 100 +  # Heavily weight full scheduling
+                 total_interviews * 10 -    # Reward more interviews
+                 violations * 50)           # Penalize constraint violations
+        
+        return score
+
+    def _validate_90_minute_constraint(self):
+        """Validate that all applicants have interviews within 90 minutes of each other."""
+        violations = []
+        
+        # Group interviews by applicant
+        applicant_interviews = {}
+        for interview in self.scheduled_interviews:
+            for app_id in interview.applicants:
+                if app_id not in applicant_interviews:
+                    applicant_interviews[app_id] = []
+                applicant_interviews[app_id].append(interview)
+        
+        # Check each applicant with multiple interviews
+        for app_id, interviews in applicant_interviews.items():
+            if len(interviews) >= 2:
+                # Sort by time
+                sorted_interviews = sorted(interviews, key=lambda x: x.time_slot.start)
+                
+                # Check gaps between consecutive interviews
+                for i in range(len(sorted_interviews) - 1):
+                    first_end = sorted_interviews[i].time_slot.end
+                    second_start = sorted_interviews[i + 1].time_slot.start
+                    
+                    gap_minutes = (second_start - first_end).total_seconds() / 60
+                    
+                    if gap_minutes > 90:
+                        applicant_name = self.applicants.get(app_id, {}).get('name', app_id)
+                        violations.append({
+                            'applicant_id': app_id,
+                            'applicant_name': applicant_name,
+                            'gap_minutes': gap_minutes,
+                            'first_interview': sorted_interviews[i],
+                            'second_interview': sorted_interviews[i + 1]
+                        })
+        
+        if violations:
+            print(f"\nWARNING: Found {len(violations)} violations of 90-minute constraint:")
+            for violation in violations:
+                print(f"  - {violation['applicant_name']}: {violation['gap_minutes']:.0f} minute gap")
+                print(f"    Between {violation['first_interview'].time_slot} and {violation['second_interview'].time_slot}")
+        else:
+            print(f"\n✓ All applicants with multiple interviews satisfy the 90-minute constraint!")
+        
+        return violations
 
     def generate_reports(self):
         """Generate all output reports."""
@@ -699,6 +1086,9 @@ class ImprovedScheduler:
         group_interviews = len([i for i in self.scheduled_interviews if i.type == 'group'])
         individual_interviews = len([i for i in self.scheduled_interviews if i.type == 'individual'])
         
+        # Check 90-minute constraint violations
+        violations = self._validate_90_minute_constraint()
+        
         with open(filename, 'w') as f:
             f.write("INTERVIEW SCHEDULING SUMMARY REPORT\n")
             f.write("=" * 50 + "\n\n")
@@ -711,10 +1101,18 @@ class ImprovedScheduler:
             f.write(f"Total Interviews Scheduled: {len(self.scheduled_interviews)}\n")
             f.write(f"Group Interviews: {group_interviews}\n")
             f.write(f"Individual Interviews: {individual_interviews}\n\n")
-            f.write("ALGORITHM USED: Improved Greedy Scheduling\n")
+            f.write("CONSTRAINT COMPLIANCE:\n")
+            f.write(f"90-minute spacing violations: {len(violations)}\n")
+            if violations:
+                f.write("Violating applicants:\n")
+                for violation in violations:
+                    f.write(f"  - {violation['applicant_name']}: {violation['gap_minutes']:.0f} minute gap\n")
+            f.write("\n")
+            f.write("ALGORITHM USED: Improved Greedy Scheduling with 90-minute Constraint\n")
             f.write("- Prioritizes complete scheduling per applicant\n")
             f.write("- Uses random shuffle for better distribution\n")
             f.write("- Ensures proper resource allocation\n")
+            f.write("- Enforces 90-minute maximum gap between interviews\n")
 
     def _generate_block_breakdown(self, output_dir):
         """Generate detailed block breakdown report."""

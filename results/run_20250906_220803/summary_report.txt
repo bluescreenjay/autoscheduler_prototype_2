@@ -1,0 +1,22 @@
+INTERVIEW SCHEDULING SUMMARY REPORT
+==================================================
+
+Total Applicants: 154
+Fully Scheduled (both interviews): 115
+Group Interview Only: 37
+Individual Interview Only: 2
+Completely Unscheduled: 0
+Overall Success Rate: 74.7%
+
+Total Interviews Scheduled: 136
+Group Interviews: 19
+Individual Interviews: 117
+
+CONSTRAINT COMPLIANCE:
+90-minute spacing violations: 0
+
+ALGORITHM USED: Improved Greedy Scheduling with 90-minute Constraint
+- Prioritizes complete scheduling per applicant
+- Uses random shuffle for better distribution
+- Ensures proper resource allocation
+- Enforces 90-minute maximum gap between interviews

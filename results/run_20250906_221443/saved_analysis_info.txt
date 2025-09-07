@@ -1,0 +1,112 @@
+1. APPLICANT SCHEDULING COMPLETENESS:
+==================================================
+  PARTIALLY SCHEDULED: Dev Patel
+    Group: No
+    Individual: Yes
+
+SUMMARY:
+  Total applicants: 154
+  Fully scheduled: 153 (99.4%)
+  Partially scheduled: 1 (0.6%)
+  Unscheduled: 0 (0.0%)
+
+2. INDIVIDUAL INTERVIEW TEAM MATCHING:
+==================================================
+Team preference matches: 93/154 (60.4%)
+
+Sample mismatches (first 5):
+  Shruthika Saravanakumar -> Bob (Juvo)
+    Applicant prefers: 
+  Riley O’Connor -> Carol (Infinitum)
+    Applicant prefers: Astra: NASA Micro-G NExT
+  Julia Burant -> David (Terra)
+    Applicant prefers: Juvo: RESNA Student Design Challenge
+  Leon Chen -> Frank (Juvo)
+    Applicant prefers: Astra: NASA Micro-G NExT, Terra: ASME Student Design Competition
+  Phillip Bagan -> Carol (Infinitum)
+    Applicant prefers: Astra: NASA Micro-G NExT, Terra: ASME Student Design Competition
+  ... and 56 more mismatches
+
+3. ROOM CONFLICT ANALYSIS:
+==================================================
+  CONFLICT in G101:
+    09/11 07:00 PM - 07:40 PM: group
+    09/11 07:20 PM - 08:00 PM: group
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/11 07:20 PM - 08:00 PM: group
+    09/11 07:40 PM - 08:00 PM: individual
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/12 05:00 PM - 05:40 PM: group
+    09/12 05:20 PM - 06:00 PM: group
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/12 05:20 PM - 06:00 PM: group
+    09/12 05:40 PM - 06:00 PM: individual
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/13 10:00 AM - 10:40 AM: group
+    09/13 10:20 AM - 11:00 AM: group
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/13 10:20 AM - 11:00 AM: group
+    09/13 10:40 AM - 11:00 AM: individual
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/13 01:00 PM - 01:40 PM: group
+    09/13 01:20 PM - 02:00 PM: group
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/13 01:20 PM - 02:00 PM: group
+    09/13 01:40 PM - 02:00 PM: individual
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/15 05:00 PM - 05:40 PM: group
+    09/15 05:20 PM - 06:00 PM: group
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/15 05:20 PM - 06:00 PM: group
+    09/15 05:40 PM - 06:00 PM: individual
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/15 06:00 PM - 06:40 PM: group
+    09/15 06:20 PM - 07:00 PM: group
+    Overlap: 20 minutes
+  CONFLICT in G101:
+    09/15 06:20 PM - 07:00 PM: group
+    09/15 06:40 PM - 07:00 PM: individual
+    Overlap: 20 minutes
+  CONFLICT in G102:
+    09/11 07:20 PM - 08:00 PM: group
+    09/11 07:40 PM - 08:00 PM: individual
+    Overlap: 20 minutes
+  ✗ 13 room conflicts found!
+
+4. GROUP INTERVIEW TEAM DIVERSITY:
+==================================================
+Team diversity distribution:
+  3 different teams: 9 group interviews
+  4 different teams: 11 group interviews
+
+Sample diverse groups (first 3):
+  Group 1: ['Terra', 'Infinitum', 'Astra'] (3 teams)
+    Recruiters: Alice, Carol, David, Eve
+  Group 2: ['Terra', 'Infinitum', 'Juvo', 'Astra'] (4 teams)
+    Recruiters: Julia, Kevin, Linda, Mike
+  Group 3: ['Terra', 'Infinitum', 'Astra'] (3 teams)
+    Recruiters: Alice, Carol, David, Eve
+
+5. INTERVIEW SPACING ANALYSIS:
+==================================================
+  ✓ All interviews comply with 90-minute spacing constraint!
+
+Spacing statistics:
+  Average spacing: 0.4 minutes
+  Minimum spacing: 0.0 minutes
+  Maximum spacing: 20.0 minutes
+  Total interview pairs analyzed: 153
+
+============================================================
+ANALYSIS COMPLETE
+============================================================
