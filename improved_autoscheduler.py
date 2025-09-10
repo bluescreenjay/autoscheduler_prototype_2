@@ -568,10 +568,15 @@ class ImprovedScheduler:
                     available_applicants.append(other_id)
             
             # Score this option (prefer larger groups, more recruiters, better timing)
-            if len(available_applicants) >= 2:  # Minimum group size
+            # Minimum group size: prefer 5, but accept 4 if necessary
+            if len(available_applicants) >= 4:  # Minimum group size of 4
                 score = (len(available_applicants) * 10 + 
                         len(available_recruiters) * 5 +
                         self._timing_score(applicant_id, time_slot.start))
+                
+                # Bonus for reaching preferred minimum of 5
+                if len(available_applicants) >= 5:
+                    score += 50  # Significant bonus for 5+ applicants
                 
                 if score > best_score:
                     best_score = score
@@ -767,11 +772,19 @@ class ImprovedScheduler:
                     not self._has_scheduling_conflict(other_id, time_slot.start, 40)):
                     other_applicants.append(other_id)
             
-            # Need at least 3 other applicants (total 4 minimum for group)
-            if len(other_applicants) < 3:
+            # Need at least 3 other applicants (total 4 minimum for group), prefer 4+ other applicants (total 5+)
+            if len(other_applicants) < 3:  # Absolute minimum: 4 total people
                 continue
+            
+            # Score based on group size - prefer larger groups
+            group_size = len(other_applicants) + 1  # +1 for main applicant
+            score = group_size * 10
+            
+            # Bonus for reaching preferred minimum of 5
+            if group_size >= 5:
+                score += 50  # Significant bonus for 5+ people
                 
-            # Create group interview
+            # Create group interview (only if we found a good option)
             group_applicants = [applicant_id] + other_applicants[:7]  # Up to 8 total
             group_recruiters = available_recruiters[:4]  # Exactly 4 recruiters
             room = available_rooms[0]

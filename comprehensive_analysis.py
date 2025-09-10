@@ -124,7 +124,10 @@ def analyze_schedule():
                 recruiter_team = recruiter_teams.get(recruiter, "Unknown")
                 
                 # Check if recruiter's team matches applicant's preferences
-                match = recruiter_team in applicant_preferred_teams or recruiter_team == "All"
+                # Now also count "General" as a correct match if applicant has any preference
+                match = (recruiter_team in applicant_preferred_teams or 
+                        recruiter_team == "All" or
+                        (recruiter_team == "General" and applicant_preferred_teams.strip() != ""))
                 individual_team_matches.append({
                     'applicant': applicant,
                     'recruiter': recruiter,

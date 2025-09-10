@@ -1,0 +1,22 @@
+MISSING EMAIL ADDRESSES REPORT
+==================================================
+
+SUMMARY:
+--------------------
+Missing recruiter emails: 0
+Missing applicant emails: 1
+Total missing emails: 1
+
+✅ All recruiter emails found!
+
+MISSING APPLICANT EMAILS:
+------------------------------
+- [EMPTY/BLANK NAME]
+
+Total: 1 applicants
+
+RECOMMENDATIONS:
+--------------------
+2. Add missing applicant emails to inputs/applicant_information.csv
+
+Report generated on: 2025-09-09 19:54:25
